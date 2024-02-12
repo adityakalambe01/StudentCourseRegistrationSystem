@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "prerequisites")
 public class Prerequisite {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long prerequisiteId;

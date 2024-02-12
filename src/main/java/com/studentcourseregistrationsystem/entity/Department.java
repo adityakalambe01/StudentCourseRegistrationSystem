@@ -18,9 +18,7 @@ public class Department {
 
     private String departmentName;
 
-    private String departmentHeadFirstName;
+    private String departmentHeadFullName;
 
-    private String departmentHeadMiddleName;
 
-    private String departmentHeadLastName;
 }

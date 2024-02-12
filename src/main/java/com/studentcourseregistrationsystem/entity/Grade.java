@@ -21,7 +21,7 @@ public class Grade {
 
     private Long courseId;
 
-    private String grade;
+    private String gradeObtained;
 
     private LocalDate gradeDate;
 }

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "registration")
 public class Registration {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long registrationId;

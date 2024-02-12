@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "semesters")
 public class Semester {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long semesterSerialNumber;

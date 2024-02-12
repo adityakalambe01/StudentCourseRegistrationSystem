@@ -19,11 +19,7 @@ public class Student {
 
     private String studentId;
 
-    private String studentFirstName;
-
-    private String studentMiddleName;
-
-    private String studentLastName;
+    private String studentFullName;
 
     private String studentEmailId;
 

@@ -16,11 +16,7 @@ public class Instructor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long instructorId;
 
-    private String instructorFirstName;
-
-    private String instructorMiddleName;
-
-    private String instructorLastName;
+    private String instructorFullName;
 
     private String instructorEmailId;
 

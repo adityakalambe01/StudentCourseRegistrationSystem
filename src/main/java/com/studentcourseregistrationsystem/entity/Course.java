@@ -24,6 +24,6 @@ public class Course {
 
     private String courseDescription;
 
-    private String courseCapacity;
+    private Long courseCapacity;
 
 }

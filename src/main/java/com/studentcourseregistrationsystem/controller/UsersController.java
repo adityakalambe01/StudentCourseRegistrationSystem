@@ -40,7 +40,7 @@ public class UsersController {
         }else {
 
         }
-        return null;
+        return redirectPage.loginUser();
     }
 
     /*
@@ -78,7 +78,7 @@ public class UsersController {
      * Login Users
      *
      * */
-    @RequestMapping("login")
+    @PostMapping("login")
     public String loginUser(String emailId, String password, HttpServletRequest request, Model model){
         String role, redirect;
         Boolean userLogin = usersService.loginUser(emailId, password);

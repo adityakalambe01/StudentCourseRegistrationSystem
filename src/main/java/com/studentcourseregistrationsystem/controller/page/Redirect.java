@@ -42,12 +42,12 @@ public class Redirect {
     *
     * */
 
-    @RequestMapping("login")
+    @RequestMapping("loginPage")
     public String loginUser(){
         return "auth/login";
     }
 
-    @RequestMapping("signup")
+    @RequestMapping("signupPage")
     public String signUp(){
         return "auth/signup";
     }

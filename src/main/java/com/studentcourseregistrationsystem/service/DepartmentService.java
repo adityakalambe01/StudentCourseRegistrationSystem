@@ -32,6 +32,7 @@ public class DepartmentService {
             Department dbDepartment = departmentRepository.findById(browserDepartment.getDepartmentId()).get();
             dbDepartment.setDepartmentName(browserDepartment.getDepartmentName());
             dbDepartment.setDepartmentHeadFullName(browserDepartment.getDepartmentHeadFullName());
+            departmentRepository.save(dbDepartment);
         }catch (Exception e){
             return false;
         }

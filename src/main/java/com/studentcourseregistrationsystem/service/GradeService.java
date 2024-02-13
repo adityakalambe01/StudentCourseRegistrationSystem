@@ -93,7 +93,7 @@ public class GradeService {
 
     /*
     *
-    * Get All Grades by ObtainedGrades
+    * Get All Grades by Obtained Grades
     *
     * */
     public List<Grade> getAllGradesByGradeObtained(String obtainedGrade){

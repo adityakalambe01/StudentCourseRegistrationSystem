@@ -1,5 +1,6 @@
 package com.studentcourseregistrationsystem.controller;
 
+import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Users;
 import com.studentcourseregistrationsystem.repository.UsersRepository;
 import com.studentcourseregistrationsystem.service.UsersService;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -19,6 +22,11 @@ public class UsersController {
 
     @Autowired
     UsersRepository usersRepository;
+
+    @Autowired
+    Redirect redirectPage;
+
+    static HttpSession httpSession;
 
     /*
      *
@@ -71,22 +79,34 @@ public class UsersController {
      *
      * */
     @RequestMapping("login")
-    public String loginUser(String emailId, String password){
+    public String loginUser(String emailId, String password, HttpServletRequest request, Model model){
         String role, redirect;
         Boolean userLogin = usersService.loginUser(emailId, password);
         if (userLogin==null){
-            redirect = "";
+            model.addAttribute("invalidEmailId","Invalid Email Id!");
+            model.addAttribute("invalidEmailIdStyle","border-color:red;");
+            redirect = redirectPage.loginUser();
         }else if (userLogin){
-            role = usersRepository.findByUserEmailId(emailId).getUserRole();
+            httpSession = request.getSession();
+
+            Users user = usersRepository.findByUserEmailId(emailId);
+            role = user.getUserRole();
+            httpSession.setAttribute("userId",user.getUserid());
+            httpSession.setAttribute("userFullName",user.getUserFullName());
+            httpSession.setAttribute("userEmailId",user.getUserEmailId());
+
             if (role.equalsIgnoreCase("admin")){
-                redirect ="";
+                redirect =redirectPage.adminDashboard();
             } else if (role.equalsIgnoreCase("student")) {
-                redirect ="";
+                redirect = redirectPage.studentDashboard();
             }else {
-                redirect ="";
+                redirect = redirectPage.instructorDashboard();
             }
+            model.addAttribute("userFullName",user.getUserFullName());
         }else {
-            redirect ="";
+            model.addAttribute("invalidPassword","Invalid Password!");
+            model.addAttribute("invalidPasswordStyle","border-color:red;");
+            redirect = redirectPage.loginUser();
         }
         return redirect;
     }

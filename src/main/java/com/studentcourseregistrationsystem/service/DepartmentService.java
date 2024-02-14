@@ -69,7 +69,22 @@ public class DepartmentService {
     *
     * */
     public List<Department> getDepartmentByName(String departmentName){
-        return departmentRepository.findByDepartmentName(departmentName);
+        return departmentRepository.findByDepartmentNameContaining(departmentName);
+    }
+
+    /*
+     *
+     * Get Department by Id
+     *
+     * */
+    public Department getDepartmentById(Long departmentId){
+        Department department;
+        try {
+            department = departmentRepository.findById(departmentId).get();
+        }catch (Exception e){
+            department = null;
+        }
+        return department;
     }
 
 

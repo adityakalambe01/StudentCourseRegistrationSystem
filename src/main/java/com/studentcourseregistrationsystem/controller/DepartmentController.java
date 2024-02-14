@@ -1,5 +1,6 @@
 package com.studentcourseregistrationsystem.controller;
 
+import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Department;
 import com.studentcourseregistrationsystem.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,10 @@ public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
+    @Autowired
+    Redirect pageRedirect;
+
+
     /*
      *
      * Add New Department
@@ -21,8 +26,10 @@ public class DepartmentController {
      * */
     @PostMapping("addDepartment")
     public String addNewDepartment(Department department, Model model){
-        if(departmentService.addNewDepartment(department)) return null;
-        return null;
+        if(departmentService.addNewDepartment(department)) {
+            model.addAttribute("allDepartments",departmentService.getAllDepartment());
+        }
+        return pageRedirect.adminDashboardDepartment();
     }
 
     /*
@@ -31,8 +38,11 @@ public class DepartmentController {
      *
      * */
     @PostMapping("updateDepartment")
-    public String updateExistingDepartment(Department browserDepartment){
-        return departmentService.updateExistingDepartment(browserDepartment) ? "null" : null ;
+    public String updateExistingDepartment(Department browserDepartment, Model model){
+        if (departmentService.updateExistingDepartment(browserDepartment)){
+            model.addAttribute("allDepartments",departmentService.getAllDepartment());
+        }
+        return pageRedirect.adminDashboardDepartment() ;
     }
 
     /*
@@ -41,8 +51,13 @@ public class DepartmentController {
      *
      * */
     @RequestMapping("deleteDepartment")
-    public String deleteExistingDepartment(Long departmentId){
-        return departmentService.deleteExistingDepartment(departmentId) ? "null" : null;
+    public String deleteExistingDepartment(Department department, Model model){
+        if(departmentService.deleteExistingDepartment(department.getDepartmentId())){
+            model.addAttribute("allDepartments",departmentService.getAllDepartment());
+        }else{
+            model.addAttribute("allDepartments",departmentService.getAllDepartment());
+        }
+        return pageRedirect.adminDashboardDepartment();
     }
 
     /*
@@ -53,7 +68,7 @@ public class DepartmentController {
     @GetMapping("allDepartments")
     public String getAllDepartment(Model model){
         model.addAttribute("allDepartments",departmentService.getAllDepartment());
-        return null;
+        return pageRedirect.adminDashboardDepartment();
     }
 
     /*
@@ -64,6 +79,19 @@ public class DepartmentController {
     @GetMapping("departmentByName")
     public String getDepartmentByName(String departmentName, Model model){
         model.addAttribute("allDepartments",departmentService.getDepartmentByName(departmentName));
-        return null;
+        return pageRedirect.adminDashboardDepartment();
+    }
+
+    /*
+    *
+    * Get Department by Id
+    *
+    * */
+    @RequestMapping({"getDepartmentById", "viewDepartment"})
+    public String getDepartmentById(Long departmentId, Model model){
+        model.addAttribute("departmentId",departmentService.getDepartmentById(departmentId).getDepartmentId());
+        model.addAttribute("departmentName", departmentService.getDepartmentById(departmentId).getDepartmentName());
+        model.addAttribute("departmentHeadFullName",departmentService.getDepartmentById(departmentId).getDepartmentHeadFullName());
+        return pageRedirect.viewDepartment();
     }
 }

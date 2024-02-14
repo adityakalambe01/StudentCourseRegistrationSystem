@@ -28,9 +28,9 @@ public class CourseService {
     *
     * */
     public boolean updateExistingCourse(Course updatedCourse){
-        Course dbCourse;
+
         try {
-            dbCourse = courseRepository.findById(updatedCourse.getCourseId()).get();
+            Course dbCourse = courseRepository.findById(updatedCourse.getCourseId()).get();
             dbCourse.setCourseCapacity(updatedCourse.getCourseCapacity());
             dbCourse.setCourseCode(updatedCourse.getCourseCode());
             dbCourse.setCourseTitle(updatedCourse.getCourseTitle());
@@ -49,10 +49,10 @@ public class CourseService {
     * Delete Existing Course
     *
     * */
-    public boolean deleteExistingCourse(Course browserCourse){
+    public boolean deleteExistingCourse(Long courseId){
         Course dbCourse;
         try {
-            dbCourse = courseRepository.findById(browserCourse.getCourseId()).get();
+            dbCourse = courseRepository.findById(courseId).get();
             courseRepository.delete(dbCourse);
         }catch (Exception e){
             return false;
@@ -84,7 +84,7 @@ public class CourseService {
     *
     * */
     public List<Course> getCourseByCourseTitle(String courseTitle){
-        return courseRepository.findByCourseTitle(courseTitle);
+        return courseRepository.findByCourseTitleContaining(courseTitle);
     }
 
     /*
@@ -107,7 +107,16 @@ public class CourseService {
 
     /*
     *
-    * Get Courses by Department Name
+    * Get Courses by Id
     *
     * */
+    public Course getCourseById(Long courseId){
+        Course course;
+        try {
+            course = courseRepository.findById(courseId).get();
+        }catch (Exception e){
+            return null;
+        }
+        return course;
+    }
 }

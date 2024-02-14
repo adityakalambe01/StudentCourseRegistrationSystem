@@ -1,7 +1,9 @@
 package com.studentcourseregistrationsystem.controller;
 
+import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Course;
 import com.studentcourseregistrationsystem.service.CourseService;
+import com.studentcourseregistrationsystem.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,15 +18,23 @@ public class CourseController {
     @Autowired
     CourseService courseService;
 
+    @Autowired
+    Redirect pageRedirect;
+
+    @Autowired
+    DepartmentService departmentService;
+
     /*
     *
     * Add New Course
     *
     * */
     @PostMapping("addNewCourse")
-    public String addNewCourse(Course course){
-        if (courseService.addNewCourse(course)) return "AllCourses";
-        return "AddCourse";
+    public String addNewCourse(Course course, Model model){
+        if (courseService.addNewCourse(course)) {
+            model.addAttribute("allCourses", courseService.getAllCourse());
+        };
+        return pageRedirect.viewAdminCourses();
     }
 
     /*
@@ -33,11 +43,12 @@ public class CourseController {
     *
     * */
     @RequestMapping("updateCourse")
-    public String updateExistingCourse(Course updatedCourse){
+    public String updateExistingCourse(Course updatedCourse, Model model){
         if (courseService.updateExistingCourse(updatedCourse)){
-            return "Updated Course";
+            model.addAttribute("allCourses",courseService.getAllCourse());
         }
-        return null;
+
+        return pageRedirect.viewAdminCourses();
     }
 
     /*
@@ -46,9 +57,11 @@ public class CourseController {
     *
     * */
     @RequestMapping("deleteCourse")
-    public String deleteExistingCourse(Course course){
-        if (courseService.deleteExistingCourse(course)) return null;
-        return null;
+    public String deleteExistingCourse(Long courseId, Model model){
+        if (courseService.deleteExistingCourse(courseId)) {
+            model.addAttribute("allCourses",courseService.getAllCourse());
+        }
+        return pageRedirect.viewAdminCourses();
     }
 
     /*
@@ -59,7 +72,7 @@ public class CourseController {
     @GetMapping("allCourses")
     public String getAllCourses(Model model){
         model.addAttribute("allCourses",courseService.getAllCourse());
-        return null;
+        return pageRedirect.viewAdminCourses();
     }
 
     /*
@@ -81,7 +94,8 @@ public class CourseController {
     @GetMapping("courseByTitle")
     public String getCourseByCourseTitle(String courseTitle, Model model){
         model.addAttribute("allCourses",courseService.getCourseByCourseTitle(courseTitle));
-        return null;
+
+        return pageRedirect.viewAdminCourses();
     }
 
     /*
@@ -104,5 +118,18 @@ public class CourseController {
     public String getCoursesByCapacityRange(Long minimumRange, Long maximumRange, Model model){
         model.addAttribute("allCourses",courseService.getCoursesByCapacityRange(minimumRange, maximumRange));
         return null;
+    }
+
+    /*
+    *
+    * Get Course by Id
+    *
+    * */
+    @GetMapping("viewCourses")
+    public String getCourseById(Long courseId, Model model){
+        model.addAttribute("departments",departmentService.getAllDepartment());
+        model.addAttribute("currentCourse",courseService.getCourseById(courseId));
+        model.addAttribute("defaultDepartmentId", courseService.getCourseById(courseId).getDepartmentId());
+        return pageRedirect.viewCurrentCourse();
     }
 }

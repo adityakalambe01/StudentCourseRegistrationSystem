@@ -34,13 +34,16 @@ public class UsersController {
      *
      * */
     @PostMapping("signUp")
-    public String addNewUser(Users user){
+    public String addNewUser(Users user, Model model){
+        String redirect;
         if (usersService.addNewUser(user)){
-
+            redirect = redirectPage.loginUser();
         }else {
-
+            model.addAttribute("emailIdAlreadyExist","Email Id already exist!");
+            model.addAttribute("emailIdAlreadyExistStyle","border-color:red;");
+            redirect = redirectPage.signUp();
         }
-        return redirectPage.loginUser();
+        return redirect;
     }
 
     /*
@@ -78,7 +81,7 @@ public class UsersController {
      * Login Users
      *
      * */
-    @PostMapping("login")
+    @PostMapping({"login"})
     public String loginUser(String emailId, String password, HttpServletRequest request, Model model){
         String role, redirect;
         Boolean userLogin = usersService.loginUser(emailId, password);

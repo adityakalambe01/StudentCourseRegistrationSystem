@@ -15,4 +15,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     List<Course> findByCourseDescription(String courseDescription);
 
     List<Course> findByCourseCapacityBetween(Long minimumRange, Long maximumRange);
+
+    List<Course> findByCourseTitleContaining(String courseTitle);
 }

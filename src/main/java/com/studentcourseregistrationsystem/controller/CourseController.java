@@ -34,7 +34,7 @@ public class CourseController {
         if (courseService.addNewCourse(course)) {
             model.addAttribute("allCourses", courseService.getAllCourse());
         };
-        return pageRedirect.viewAdminCourses();
+        return pageRedirect.viewAdminCourses(model);
     }
 
     /*
@@ -48,7 +48,7 @@ public class CourseController {
             model.addAttribute("allCourses",courseService.getAllCourse());
         }
 
-        return pageRedirect.viewAdminCourses();
+        return pageRedirect.viewAdminCourses(model);
     }
 
     /*
@@ -61,7 +61,7 @@ public class CourseController {
         if (courseService.deleteExistingCourse(courseId)) {
             model.addAttribute("allCourses",courseService.getAllCourse());
         }
-        return pageRedirect.viewAdminCourses();
+        return pageRedirect.viewAdminCourses(model);
     }
 
     /*
@@ -72,7 +72,7 @@ public class CourseController {
     @GetMapping("allCourses")
     public String getAllCourses(Model model){
         model.addAttribute("allCourses",courseService.getAllCourse());
-        return pageRedirect.viewAdminCourses();
+        return pageRedirect.viewAdminCourses(model);
     }
 
     /*
@@ -94,8 +94,7 @@ public class CourseController {
     @GetMapping("courseByTitle")
     public String getCourseByCourseTitle(String courseTitle, Model model){
         model.addAttribute("allCourses",courseService.getCourseByCourseTitle(courseTitle));
-
-        return pageRedirect.viewAdminCourses();
+        return pageRedirect.viewAdminCourses(model);
     }
 
     /*
@@ -130,6 +129,7 @@ public class CourseController {
         model.addAttribute("departments",departmentService.getAllDepartment());
         model.addAttribute("currentCourse",courseService.getCourseById(courseId));
         model.addAttribute("defaultDepartmentId", courseService.getCourseById(courseId).getDepartmentId());
-        return pageRedirect.viewCurrentCourse();
+        model.addAttribute(Redirect.currentOpenTab, Redirect.colorOfCurrentOpenedTab);
+        return pageRedirect.viewCurrentCourse(model);
     }
 }

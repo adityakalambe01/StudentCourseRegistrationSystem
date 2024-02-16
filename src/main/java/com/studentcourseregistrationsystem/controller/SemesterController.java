@@ -1,5 +1,6 @@
 package com.studentcourseregistrationsystem.controller;
 
+import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Semester;
 import com.studentcourseregistrationsystem.service.SemesterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import java.util.List;
 public class SemesterController {
     @Autowired
     SemesterService semesterService;
+
+    @Autowired
+    Redirect pageRedirect;
 
     /*
      *
@@ -69,7 +73,7 @@ public class SemesterController {
     public String getAllSemester(Model model){
         model.addAttribute("allSemester", semesterService.getAllSemester());
 
-        return null;
+        return pageRedirect.allSemester(model);
     }
 
     /*

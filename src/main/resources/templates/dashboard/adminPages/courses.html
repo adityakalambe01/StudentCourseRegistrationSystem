@@ -152,7 +152,7 @@
 
     <a href="allDepartments">Department</a>
 
-    <a href="allCourses">Course</a>
+    <a href="allCourses" th:style="${currentOpenedTab}">Course</a>
 
     <a href="allPrerequisite">Prerequisite</a>
 
@@ -164,7 +164,7 @@
 
     <a href="allInstructor">Instructor's</a>
 
-    <a href="allStudent">Student's</a>
+    <a href="allStudents">Student's</a>
 
     <a href="allRegistration">Registration</a>
 
@@ -188,7 +188,7 @@
         <tr style="text-align: left">
             <th>No.</th>
             <th>Course Code</th>
-            <th>Title</th>
+            <th colspan="3">Title</th>
             <th>Description</th>
             <th>Capacity</th>
             <th>Action</th>
@@ -198,7 +198,7 @@
         <tr th:each="course, courseIndex : ${allCourses}">
             <td th:text="${courseIndex.count}"></td>
             <td th:text="${course.courseCode}"></td>
-            <td th:text="${course.courseTitle}"></td>
+            <td th:text="${course.courseTitle}" colspan="3"></td>
             <td th:text="${course.courseDescription}"></td>
             <td th:text="${course.courseCapacity}"></td>
             <td>

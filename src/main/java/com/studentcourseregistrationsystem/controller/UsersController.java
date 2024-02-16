@@ -119,10 +119,10 @@ public class UsersController {
      * Get All Users
      *
      * */
-    @GetMapping("allUsers")
+    @GetMapping("allUser")
     public String getAllUsers(Model model){
         model.addAttribute("allUsers", usersService.getAllUsers());
-        return null;
+        return redirectPage.allUser();
     }
 
     /*

@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Redirect {
     @Autowired
     DepartmentService departmentService;
+    public static final String currentOpenTab = "currentOpenedTab";
+    public static final String colorOfCurrentOpenedTab = "background-color: green !important;";
+
+    public static void showCurrentTabColor(Model model){
+        model.addAttribute(Redirect.currentOpenTab, Redirect.colorOfCurrentOpenedTab);
+    }
     /*
     *
     * Home Page
@@ -74,34 +80,128 @@ public class Redirect {
     *
     * */
     @RequestMapping("department")
-    public String adminDashboardDepartment(){
+    public String adminDashboardDepartment(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/department";
     }
 
     @RequestMapping("addDepartment")
-    public String addDepartment(){
+    public String addDepartment(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/addDepartment";
     }
 
 //    @RequestMapping("viewDepartment")
-    public String viewDepartment(){
+    public String viewDepartment(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/viewDepartment";
     }
 
     @RequestMapping("course")
-    public String viewAdminCourses(){
+    public String viewAdminCourses(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/courses";
     }
 
 //    @RequestMapping("")
 
-    public String viewCurrentCourse(){
+    public String viewCurrentCourse(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/viewCourses";
     }
 
     @RequestMapping("addCoursePage")
     public String addNewCourse(Model model){
         model.addAttribute("departments",departmentService.getAllDepartment());
+        showCurrentTabColor(model);
         return "dashboard/adminPages/addCourses";
+    }
+
+    public String allPrerequisite(){
+        return "dashboard/adminPages/prerequisite";
+    }
+
+    public String viewCurrentPrerequisite(){
+        return "dashboard/adminPages/viewPrerequisite";
+    }
+
+    public String addPrerequisite(){
+        return "dashboard/adminPages/addPrerequisite";
+    }
+
+    public String allRegistration(){
+        return "dashboard/adminPages/registration";
+    }
+
+    public String viewCurrentRegistration(){
+        return "dashboard/adminPages/ViewRegistration";
+    }
+
+    public String addRegistration(){
+        return "dashboard/adminPages/addRegistration";
+    }
+
+    public String allGrade(){
+        return "dashboard/adminPages/grade";
+    }
+
+    public String addGrade(){
+        return "dashboard/adminPages/addGrade";
+    }
+
+    public String viewCurrentGrade(){
+        return "dashboard/adminPages/viewGrade";
+    }
+
+    public String allUser(){
+        return "dashboard/adminPages/user";
+    }
+
+    public String addUser(){
+        return "dashboard/adminPages/addUser";
+    }
+
+    public String viewCurrentUser(){
+        return "dashboard/adminPages/viewUser";
+    }
+
+    public String allStudent(){
+        return "dashboard/adminPages/student";
+    }
+
+    public String addStudent(){
+        return "dashboard/adminPages/addStudent";
+    }
+
+    public String viewCurrentStudent(){
+        return "dashboard/adminPages/viewStudent";
+    }
+
+    public String allSemester(Model model){
+        showCurrentTabColor(model);
+        return "dashboard/adminPages/semester";
+    }
+
+    public String addSemester(Model model){
+        showCurrentTabColor(model);
+        return "dashboard/adminPages/addSemester";
+    }
+
+    public String viewCurrentSemester(Model model){
+        showCurrentTabColor(model);
+        return "dashboard/adminPages/viewSemester";
+    }
+
+    public String allInstructor(Model model){
+        showCurrentTabColor(model);
+        return "dashboard/adminPages/instructor";
+    }
+
+    public String addInstructor(){
+        return "dashboard/adminPages/addInstructor";
+    }
+
+    public String viewCurrentInstructor(){
+        return "dashboard/adminPages/viewInstructor";
     }
 }

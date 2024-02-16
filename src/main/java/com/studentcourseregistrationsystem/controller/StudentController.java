@@ -1,5 +1,6 @@
 package com.studentcourseregistrationsystem.controller;
 
+import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Student;
 import com.studentcourseregistrationsystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import java.util.List;
 public class StudentController {
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    Redirect pageRedirect;
 
     /*
      *
@@ -68,7 +72,7 @@ public class StudentController {
     @GetMapping("allStudents")
     public String getAllStudents(Model model){
         model.addAttribute("allStudents", studentService.getAllStudents());
-        return null;
+        return pageRedirect.allStudent();
     }
 
     /*

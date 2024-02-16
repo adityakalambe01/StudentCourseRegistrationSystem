@@ -1,5 +1,6 @@
 package com.studentcourseregistrationsystem.controller;
 
+import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Instructor;
 import com.studentcourseregistrationsystem.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class InstructorController {
     @Autowired
     InstructorService instructorService;
+
+    @Autowired
+    Redirect pageredirect;
 
     /*
     *
@@ -69,7 +73,7 @@ public class InstructorController {
     @GetMapping("allInstructor")
     public String getAllInstructors(Model model){
         model.addAttribute("getAllInstructor",instructorService.getAllInstructors());
-        return null;
+        return pageredirect.allInstructor(model);
     }
 
     /*

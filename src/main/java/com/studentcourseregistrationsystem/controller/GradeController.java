@@ -1,5 +1,6 @@
 package com.studentcourseregistrationsystem.controller;
 
+import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Grade;
 import com.studentcourseregistrationsystem.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import java.time.LocalDate;
 public class GradeController {
     @Autowired
     GradeService gradeService;
+
+    @Autowired
+    Redirect pageRedirect;
 
     /*
     *
@@ -67,10 +71,10 @@ public class GradeController {
     * Get All Grades
     *
     * */
-    @GetMapping("allGrades")
+    @GetMapping("allGrade")
     public String getAllGrades(Model model){
         model.addAttribute("allGrade",gradeService.getAllGrades());
-        return null;
+        return pageRedirect.allGrade();
     }
 
     /*

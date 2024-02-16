@@ -1,5 +1,6 @@
 package com.studentcourseregistrationsystem.controller;
 
+import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Prerequisite;
 import com.studentcourseregistrationsystem.service.PrerequisiteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PrerequisiteController {
     @Autowired
     PrerequisiteService prerequisiteService;
+
+    @Autowired
+    Redirect pageRedirect;
 
     /*
     *
@@ -78,7 +82,7 @@ public class PrerequisiteController {
     @GetMapping("allPrerequisite")
     public String getAllPrerequisite(Model model){
         model.addAttribute("allPrerequisite", prerequisiteService.getAllPrerequisite());
-        return null;
+        return pageRedirect.allPrerequisite();
     }
 
     /*

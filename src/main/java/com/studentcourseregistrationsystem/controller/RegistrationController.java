@@ -1,5 +1,6 @@
 package com.studentcourseregistrationsystem.controller;
 
+import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Registration;
 import com.studentcourseregistrationsystem.service.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegistrationController {
     @Autowired
     RegistrationService registrationService;
+
+    @Autowired
+    Redirect pageRedirect;
 
     /*
     *
@@ -69,7 +73,7 @@ public class RegistrationController {
     @GetMapping("allRegistration")
     public String getAllRegistration(Model model){
         model.addAttribute("allRegistration",registrationService.getAllRegistration());
-        return null;
+        return pageRedirect.allRegistration();
     }
 
     /*

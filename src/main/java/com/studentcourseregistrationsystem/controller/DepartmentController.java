@@ -29,7 +29,7 @@ public class DepartmentController {
         if(departmentService.addNewDepartment(department)) {
             model.addAttribute("allDepartments",departmentService.getAllDepartment());
         }
-        return pageRedirect.adminDashboardDepartment();
+        return pageRedirect.adminDashboardDepartment(model);
     }
 
     /*
@@ -42,7 +42,7 @@ public class DepartmentController {
         if (departmentService.updateExistingDepartment(browserDepartment)){
             model.addAttribute("allDepartments",departmentService.getAllDepartment());
         }
-        return pageRedirect.adminDashboardDepartment() ;
+        return pageRedirect.adminDashboardDepartment(model) ;
     }
 
     /*
@@ -57,7 +57,7 @@ public class DepartmentController {
         }else{
             model.addAttribute("allDepartments",departmentService.getAllDepartment());
         }
-        return pageRedirect.adminDashboardDepartment();
+        return pageRedirect.adminDashboardDepartment(model);
     }
 
     /*
@@ -68,7 +68,8 @@ public class DepartmentController {
     @GetMapping("allDepartments")
     public String getAllDepartment(Model model){
         model.addAttribute("allDepartments",departmentService.getAllDepartment());
-        return pageRedirect.adminDashboardDepartment();
+
+        return pageRedirect.adminDashboardDepartment(model);
     }
 
     /*
@@ -79,7 +80,7 @@ public class DepartmentController {
     @GetMapping("departmentByName")
     public String getDepartmentByName(String departmentName, Model model){
         model.addAttribute("allDepartments",departmentService.getDepartmentByName(departmentName));
-        return pageRedirect.adminDashboardDepartment();
+        return pageRedirect.adminDashboardDepartment(model);
     }
 
     /*
@@ -92,6 +93,6 @@ public class DepartmentController {
         model.addAttribute("departmentId",departmentService.getDepartmentById(departmentId).getDepartmentId());
         model.addAttribute("departmentName", departmentService.getDepartmentById(departmentId).getDepartmentName());
         model.addAttribute("departmentHeadFullName",departmentService.getDepartmentById(departmentId).getDepartmentHeadFullName());
-        return pageRedirect.viewDepartment();
+        return pageRedirect.viewDepartment(model);
     }
 }

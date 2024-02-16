@@ -122,7 +122,7 @@ public class UsersController {
     @GetMapping("allUser")
     public String getAllUsers(Model model){
         model.addAttribute("allUsers", usersService.getAllUsers());
-        return redirectPage.allUser();
+        return redirectPage.allUser(model);
     }
 
     /*

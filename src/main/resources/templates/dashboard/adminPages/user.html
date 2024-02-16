@@ -187,19 +187,21 @@
         <thead>
         <tr style="text-align: left">
             <th>No.</th>
-            <th>Department Name</th>
-            <th>Department Head</th>
-            <th>Actions</th>
+            <th>Full Name</th>
+            <th>Email Id</th>
+            <th>Role</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="department, deptIndex : ${allDepartments}">
-            <td th:text="${deptIndex.count}"></td>
-            <td th:text="${department.departmentName}"></td>
-            <td th:text="${department.departmentHeadFullName}"></td>
+        <tr th:each="user, userIndex : ${allUsers}">
+            <td th:text="${userIndex.count}"></td>
+            <td th:text="${user.userFullName}"></td>
+            <td th:text="${user.userEmailId}"></td>
+            <td th:text="${user.userRole}"></td>
             <td>
                 <form>
-                    <input type="hidden" name="departmentId" th:value="${department.departmentId}">
+                    <input type="hidden" name="departmentId" th:value="${user.userid}">
                     <input class="btn btn-view" type="submit" value="View" formaction="viewDepartment">
                     <input class="btn btn-delete" type="submit" value="Delete" formaction="deleteDepartment">
                 </form>
@@ -210,7 +212,7 @@
 
 
     <form>
-        <input class="btn btn-new-dept" type="submit" value="Add Department" formaction="addDepartment">
+        <input class="btn btn-new-dept" type="submit" value="Add User" formaction="addNewUser">
     </form>
 
 

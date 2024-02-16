@@ -11,10 +11,10 @@ import java.util.List;
 public interface UsersRepository extends JpaRepository<Users, Long> {
     Users findByUserEmailId(String userEmailId);
 
-    @Query("select u.userid ,u.userFullName, u.userEmailId, u.userEmailId, u.userRole from Users u where u.userRole not like 'admin' order by u.userid asc")
+    @Query("select u from Users u where u.userRole not like 'admin' order by u.userid asc")
     List<Users> findAll();
 
-    @Query("select u.userid ,u.userFullName, u.userEmailId, u.userEmailId, u.userRole from Users u where u.userRole like ?1 order by u.userid asc")
+    @Query("select u from Users u where u.userRole like ?1 order by u.userid asc")
     List<Users> findByUserRole(String userRole);
 
     List<Users> findByUserFullNameContaining(String userName);

@@ -153,15 +153,19 @@ public class Redirect {
         return "dashboard/adminPages/viewGrade";
     }
 
-    public String allUser(){
+    public String allUser(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/user";
     }
 
-    public String addUser(){
+    @RequestMapping("addNewUser")
+    public String addUser(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/addUser";
     }
 
-    public String viewCurrentUser(){
+    public String viewCurrentUser(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/viewUser";
     }
 

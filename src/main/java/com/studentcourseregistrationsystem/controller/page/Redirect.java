@@ -117,39 +117,48 @@ public class Redirect {
         return "dashboard/adminPages/addCourses";
     }
 
-    public String allPrerequisite(){
+    public String allPrerequisite(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/prerequisite";
     }
 
-    public String viewCurrentPrerequisite(){
+    public String viewCurrentPrerequisite(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/viewPrerequisite";
     }
 
-    public String addPrerequisite(){
+    public String addPrerequisite(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/addPrerequisite";
     }
 
-    public String allRegistration(){
+    public String allRegistration(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/registration";
     }
 
-    public String viewCurrentRegistration(){
+    public String viewCurrentRegistration(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/ViewRegistration";
     }
 
-    public String addRegistration(){
+    public String addRegistration(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/addRegistration";
     }
 
-    public String allGrade(){
+    public String allGrade(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/grade";
     }
 
-    public String addGrade(){
+    public String addGrade(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/addGrade";
     }
 
-    public String viewCurrentGrade(){
+    public String viewCurrentGrade(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/viewGrade";
     }
 
@@ -169,15 +178,18 @@ public class Redirect {
         return "dashboard/adminPages/viewUser";
     }
 
-    public String allStudent(){
+    public String allStudent(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/student";
     }
 
-    public String addStudent(){
+    public String addStudent(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/addStudent";
     }
 
-    public String viewCurrentStudent(){
+    public String viewCurrentStudent(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/viewStudent";
     }
 
@@ -201,11 +213,13 @@ public class Redirect {
         return "dashboard/adminPages/instructor";
     }
 
-    public String addInstructor(){
+    public String addInstructor(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/addInstructor";
     }
 
-    public String viewCurrentInstructor(){
+    public String viewCurrentInstructor(Model model){
+        showCurrentTabColor(model);
         return "dashboard/adminPages/viewInstructor";
     }
 }

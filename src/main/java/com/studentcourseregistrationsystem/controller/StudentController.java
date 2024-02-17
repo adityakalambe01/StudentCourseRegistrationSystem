@@ -72,7 +72,7 @@ public class StudentController {
     @GetMapping("allStudents")
     public String getAllStudents(Model model){
         model.addAttribute("allStudents", studentService.getAllStudents());
-        return pageRedirect.allStudent();
+        return pageRedirect.allStudent(model);
     }
 
     /*

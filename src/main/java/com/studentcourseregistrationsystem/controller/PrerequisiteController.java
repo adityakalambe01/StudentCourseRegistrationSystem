@@ -82,7 +82,7 @@ public class PrerequisiteController {
     @GetMapping("allPrerequisite")
     public String getAllPrerequisite(Model model){
         model.addAttribute("allPrerequisite", prerequisiteService.getAllPrerequisite());
-        return pageRedirect.allPrerequisite();
+        return pageRedirect.allPrerequisite(model);
     }
 
     /*

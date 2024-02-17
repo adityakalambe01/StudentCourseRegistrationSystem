@@ -73,7 +73,7 @@ public class RegistrationController {
     @GetMapping("allRegistration")
     public String getAllRegistration(Model model){
         model.addAttribute("allRegistration",registrationService.getAllRegistration());
-        return pageRedirect.allRegistration();
+        return pageRedirect.allRegistration(model);
     }
 
     /*

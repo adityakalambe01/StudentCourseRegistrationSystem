@@ -74,7 +74,7 @@ public class GradeController {
     @GetMapping("allGrade")
     public String getAllGrades(Model model){
         model.addAttribute("allGrade",gradeService.getAllGrades());
-        return pageRedirect.allGrade();
+        return pageRedirect.allGrade(model);
     }
 
     /*

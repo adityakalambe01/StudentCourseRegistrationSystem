@@ -30,9 +30,7 @@ public class StudentService {
     public boolean updateExistingStudent(Student updateStudent){
         try {
             Student dbStudent = studentRepository.findById(updateStudent.getStudentSerialNumber()).get();
-            dbStudent.setStudentId(
-                    updateStudent.getStudentId()
-            );
+
             dbStudent.setStudentFullName(
                     updateStudent.getStudentFullName()
             );
@@ -119,5 +117,14 @@ public class StudentService {
     * */
     public List<Student> getAllStudentByStudentIdAsc(){
         return studentRepository.findByStudentIdAsc();
+    }
+
+    /*
+    *
+    * Get Student by Id
+    *
+    * */
+    public Student viewCurrentStudent(Long studentId){
+        return studentRepository.findById(studentId).get();
     }
 }

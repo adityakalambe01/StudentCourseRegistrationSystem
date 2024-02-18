@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Global styles */
         body {
@@ -181,21 +182,35 @@
         <thead>
         <tr style="text-align: left">
             <th>No.</th>
-            <th>Department Name</th>
-            <th>Department Head</th>
-            <th>Actions</th>
+            <th>Name</th>
+            <th>Email Id</th>
+            <th>Mobile Number</th>
+            <th>Address</th>
+            <th>DOB</th>
+            <th>Gender</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="department, deptIndex : ${allDepartments}">
-            <td th:text="${deptIndex.count}"></td>
-            <td th:text="${department.departmentName}"></td>
-            <td th:text="${department.departmentHeadFullName}"></td>
+        <tr th:each="student, studIndex : ${allStudents}" style="height: 100px;">
+            <td th:text="${studIndex.count}"></td>
+            <td th:text="${student.studentFullName}"></td>
+            <td th:text="${student.studentEmailId}"></td>
+            <td th:text="${student.studentMobileNumber}"></td>
+            <td th:text="${student.studentAddress}" ></td>
+            <td th:text="${student.studentDateOfBirth}"></td>
+            <td th:text="${student.studentGender}"></td>
             <td>
                 <form>
-                    <input type="hidden" name="departmentId" th:value="${department.departmentId}">
-                    <input class="btn btn-view" type="submit" value="View" formaction="viewDepartment">
-                    <input class="btn btn-delete" type="submit" value="Delete" formaction="deleteDepartment">
+                    <input type="hidden" name="studentSerialNumber" th:value="${student.studentSerialNumber}">
+
+                    <button class="btn btn-view" type="submit" formaction="viewCurrentStudent">
+                        <i class="fas fa-eye"></i>
+                    </button>
+
+                    <button class="btn btn-delete" type="submit" formaction="deleteStudent">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </form>
             </td>
         </tr>
@@ -204,7 +219,9 @@
 
 
     <form>
-        <input class="btn btn-new-dept" type="submit" value="Add Department" formaction="addDepartment">
+        <button class="btn btn-new-dept" type="submit" formaction="addStudentPage">
+            <i class="fas fa-plus"></i>
+        </button>
     </form>
 
 

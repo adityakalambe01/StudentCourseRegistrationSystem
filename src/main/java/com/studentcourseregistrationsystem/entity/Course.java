@@ -18,6 +18,8 @@ public class Course {
 
     private Long departmentId;
 
+    private String departmentName;
+
     private String courseCode;
 
     private String courseTitle;

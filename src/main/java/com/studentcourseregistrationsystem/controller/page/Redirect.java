@@ -1,6 +1,7 @@
 package com.studentcourseregistrationsystem.controller.page;
 
 import com.studentcourseregistrationsystem.service.DepartmentService;
+import com.studentcourseregistrationsystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Redirect {
     @Autowired
     DepartmentService departmentService;
+
+    @Autowired
+    StudentService studentService;
     public static final String currentOpenTab = "currentOpenedTab";
     public static final String colorOfCurrentOpenedTab = "background-color: green !important;";
 
@@ -179,10 +183,12 @@ public class Redirect {
     }
 
     public String allStudent(Model model){
+        model.addAttribute("allStudents", studentService.getAllStudents());
         showCurrentTabColor(model);
         return "dashboard/adminPages/student";
     }
 
+    @RequestMapping("addStudentPage")
     public String addStudent(Model model){
         showCurrentTabColor(model);
         return "dashboard/adminPages/addStudent";

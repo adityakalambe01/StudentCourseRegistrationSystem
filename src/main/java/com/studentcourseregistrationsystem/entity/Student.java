@@ -17,8 +17,6 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentSerialNumber;
 
-    private String studentId;
-
     private String studentFullName;
 
     private String studentEmailId;

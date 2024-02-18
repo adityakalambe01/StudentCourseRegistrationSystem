@@ -2,6 +2,7 @@ package com.studentcourseregistrationsystem.service;
 
 import com.studentcourseregistrationsystem.entity.Course;
 import com.studentcourseregistrationsystem.repository.CourseRepository;
+import com.studentcourseregistrationsystem.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +12,9 @@ import java.util.List;
 public class CourseService {
     @Autowired
     CourseRepository courseRepository;
+
+    @Autowired
+    DepartmentRepository departmentRepository;
 
     /*
     *
@@ -36,6 +40,7 @@ public class CourseService {
             dbCourse.setCourseTitle(updatedCourse.getCourseTitle());
             dbCourse.setCourseDescription(updatedCourse.getCourseDescription());
             dbCourse.setDepartmentId(updatedCourse.getDepartmentId());
+            dbCourse.setDepartmentName(departmentRepository.findById(updatedCourse.getDepartmentId()).get().getDepartmentName());
 
             courseRepository.save(dbCourse);
         }catch (Exception e){

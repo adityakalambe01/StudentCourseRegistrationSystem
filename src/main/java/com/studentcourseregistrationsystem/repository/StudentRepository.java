@@ -16,6 +16,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("select s from Student s order by s.studentFullName asc")
     List<Student> findByStudentFullNameAsc();
 
-    @Query("select s from Student s order by s.studentId asc")
+    @Query("select s from Student s order by s.studentFullName")
     List<Student> findByStudentIdAsc();
 }

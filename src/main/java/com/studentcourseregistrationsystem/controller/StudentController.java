@@ -4,13 +4,14 @@ import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Student;
 import com.studentcourseregistrationsystem.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class StudentController {
@@ -26,11 +27,25 @@ public class StudentController {
      *
      * */
     @PostMapping("addStudent")
-    public String addNewStudent(Student student){
+    public String addNewStudent(
+                                @RequestParam String studentFullName,
+                                @RequestParam String studentEmailId,
+                                @RequestParam Long studentMobileNumber,
+                                @RequestParam String studentAddress,
+                                @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate studentDateOfBirth,
+                                @RequestParam String studentGender,
+                                Model model){
+        Student student = new Student();
+        student.setStudentFullName(studentFullName);
+        student.setStudentEmailId(studentEmailId);
+        student.setStudentMobileNumber(studentMobileNumber);
+        student.setStudentAddress(studentAddress);
+        student.setStudentDateOfBirth(studentDateOfBirth);
+        student.setStudentGender(studentGender);
         if (studentService.addNewStudent(student)){
 
         }
-        return null;
+        return pageRedirect.allStudent(model);
     }
 
     /*
@@ -39,13 +54,28 @@ public class StudentController {
      *
      * */
     @PostMapping("updateStudent")
-    public String updateExistingStudent(Student updateStudent){
-        if (studentService.updateExistingStudent(updateStudent)){
+    public String updateExistingStudent(@RequestParam Long studentSerialNumber,
+                                        @RequestParam String studentFullName,
+                                        @RequestParam String studentEmailId,
+                                        @RequestParam Long studentMobileNumber,
+                                        @RequestParam String studentAddress,
+                                        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate studentDateOfBirth,
+                                        @RequestParam String studentGender,
+                                        Model model){
+        Student s = studentService.viewCurrentStudent(studentSerialNumber);
+
+        s.setStudentFullName(studentFullName);
+        s.setStudentEmailId(studentEmailId);
+        s.setStudentMobileNumber(studentMobileNumber);
+        s.setStudentAddress(studentAddress);
+        s.setStudentDateOfBirth(studentDateOfBirth);
+        s.setStudentGender(studentGender);
+        if (studentService.updateExistingStudent(s)){
 
         }else {
 
         }
-        return null;
+        return pageRedirect.allStudent(model);
     }
 
     /*
@@ -54,14 +84,15 @@ public class StudentController {
      *
      * */
     @RequestMapping("deleteStudent")
-    public String deleteExistingStudent(Student student){
-        if (studentService.deleteExistingStudent(student.getStudentSerialNumber())){
+    public String deleteExistingStudent(Long studentSerialNumber, Model model){
+//        Student s = studentService.viewCurrentStudent(studentSerialNumber);
+        if (studentService.deleteExistingStudent(studentSerialNumber)){
 
         }else {
 
         }
 
-        return null;
+        return pageRedirect.allStudent(model);
     }
 
     /*
@@ -71,7 +102,6 @@ public class StudentController {
      * */
     @GetMapping("allStudents")
     public String getAllStudents(Model model){
-        model.addAttribute("allStudents", studentService.getAllStudents());
         return pageRedirect.allStudent(model);
     }
 
@@ -117,5 +147,17 @@ public class StudentController {
     public String getAllStudentByStudentIdAsc(Model model){
         model.addAttribute("allStudents", studentService.getAllStudentByStudentIdAsc());
         return null;
+    }
+
+
+    /*
+    *
+    *  Get Student by ID
+    *
+    * */
+    @RequestMapping("viewCurrentStudent")
+    public String viewCurrentStudent(Long studentSerialNumber, Model model){
+        model.addAttribute("currentStudent",studentService.viewCurrentStudent(studentSerialNumber));
+        return pageRedirect.viewCurrentStudent(model);
     }
 }

@@ -109,4 +109,19 @@ public class RegistrationService {
     public List<Registration> getAllStatusByCourseIdAndStatus(Long courseId, String status){
         return registrationRepository.findByCourseIdAndStatus(courseId, status);
     }
+
+    /*
+    *
+    * Get Registration by Id
+    *
+    * */
+    public Registration getRegistrationById(Long registrationId){
+        Registration registration;
+        try {
+            registration = registrationRepository.findById(registrationId).get();
+        }catch (Exception e){
+            registration = null;
+        }
+        return registration;
+    }
 }

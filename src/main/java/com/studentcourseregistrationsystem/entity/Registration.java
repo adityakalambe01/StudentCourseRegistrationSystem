@@ -20,7 +20,11 @@ public class Registration {
 
     private Long studentId;
 
+    private String studentName;
+
     private Long courseId;
+
+    private String courseName;
 
     private LocalDate registrationDate;
 

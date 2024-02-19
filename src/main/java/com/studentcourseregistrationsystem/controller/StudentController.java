@@ -2,7 +2,9 @@ package com.studentcourseregistrationsystem.controller;
 
 import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Student;
+import com.studentcourseregistrationsystem.entity.Users;
 import com.studentcourseregistrationsystem.service.StudentService;
+import com.studentcourseregistrationsystem.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ import java.util.Optional;
 public class StudentController {
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    UsersService usersService;
 
     @Autowired
     Redirect pageRedirect;
@@ -42,7 +47,12 @@ public class StudentController {
         student.setStudentAddress(studentAddress);
         student.setStudentDateOfBirth(studentDateOfBirth);
         student.setStudentGender(studentGender);
-        if (studentService.addNewStudent(student)){
+        Users user = new Users();
+        user.setUserFullName(studentFullName);
+        user.setUserEmailId(studentEmailId);
+        user.setUserPassword(studentEmailId);
+        user.setUserRole("Student");
+        if (studentService.addNewStudent(student) && usersService.addNewUser(user)){
 
         }
         return pageRedirect.allStudent(model);

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         /* Global styles */
         body {
@@ -125,6 +126,11 @@
             color: #fff; /* White text color */
         }
 
+        .btn-approve{
+            background-color: #28a745; /* Green color for view button */
+            color: #fff; /* White text color */
+        }
+
         .btn-new-dept {
             background-color: #ffc107; /* Yellow color for new department button */
             color: #000; /* Black text color */
@@ -154,9 +160,9 @@
 
     <a href="allCourses">Course</a>
 
-    <a href="allSemester">Semester</a>
+<!--    <a href="allSemester">Semester</a>-->
 
-    <a href="allUser">Users</a>
+<!--    <a href="allUser">Users</a>-->
 
     <a href="allStudents">Students</a>
 
@@ -181,21 +187,35 @@
         <thead>
         <tr style="text-align: left">
             <th>No.</th>
-            <th>Department Name</th>
-            <th>Department Head</th>
+            <th>Student Name</th>
+            <th>Course Name</th>
+            <th>Registration Date</th>
+            <th>Status</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="department, deptIndex : ${allDepartments}">
-            <td th:text="${deptIndex.count}"></td>
-            <td th:text="${department.departmentName}"></td>
-            <td th:text="${department.departmentHeadFullName}"></td>
+        <tr th:each="registration, regIndex : ${allRegistration}">
+            <td th:text="${regIndex.count}"></td>
+            <td th:text="${registration.studentName}"></td>
+            <td th:text="${registration.courseName}"></td>
+            <td th:text="${registration.registrationDate}"></td>
+            <td th:text="${registration.status}"></td>
             <td>
-                <form>
-                    <input type="hidden" name="departmentId" th:value="${department.departmentId}">
-                    <input class="btn btn-view" type="submit" value="View" formaction="viewDepartment">
-                    <input class="btn btn-delete" type="submit" value="Delete" formaction="deleteDepartment">
+                <form method="post">
+                    <input type="hidden" name="registrationId" th:value="${registration.registrationId}">
+
+                    <button class="btn btn-delete" type="submit" formaction="deleteRegistration">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+
+                    <button class="btn btn-view" type="submit" formaction="dropRegistration">
+                        <i class="fas fa-times"></i>
+                    </button>
+
+                    <button class="btn btn-approve" type="submit" formaction="approveRegistration">
+                        <i class="fas fa-check"></i>
+                    </button>
                 </form>
             </td>
         </tr>
@@ -204,7 +224,7 @@
 
 
     <form>
-        <input class="btn btn-new-dept" type="submit" value="Add Department" formaction="addDepartment">
+        <button class="btn btn-new-dept" type="submit" formaction="addNewRegistration"><i class="fas fa-plus"></i></button>
     </form>
 
 

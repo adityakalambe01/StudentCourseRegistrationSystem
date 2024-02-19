@@ -26,7 +26,7 @@ public class UsersController {
     @Autowired
     Redirect redirectPage;
 
-    static HttpSession httpSession;
+    public static HttpSession httpSession;
 
     /*
      *

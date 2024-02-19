@@ -71,7 +71,7 @@ public class RegistrationService {
     *
     * */
     public List<Registration> getAllRegistration(){
-        return registrationRepository.findAll();
+        return registrationRepository.findAllDesc();
     }
 
     /*

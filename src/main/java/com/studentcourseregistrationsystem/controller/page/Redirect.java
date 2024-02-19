@@ -1,5 +1,6 @@
 package com.studentcourseregistrationsystem.controller.page;
 
+import com.studentcourseregistrationsystem.controller.UsersController;
 import com.studentcourseregistrationsystem.service.CourseService;
 import com.studentcourseregistrationsystem.service.DepartmentService;
 import com.studentcourseregistrationsystem.service.RegistrationService;
@@ -213,6 +214,7 @@ public class Redirect {
 
     public String allSemester(Model model){
         showCurrentTabColor(model);
+
         return "dashboard/adminPages/semester";
     }
 
@@ -239,5 +241,23 @@ public class Redirect {
     public String viewCurrentInstructor(Model model){
         showCurrentTabColor(model);
         return "dashboard/adminPages/viewInstructor";
+    }
+
+
+    @RequestMapping("logout")
+    public String logout(){
+        UsersController.httpSession.invalidate();
+        return "index";
+    }
+
+    /*
+    *
+    * Student Dashboard
+    *
+    * */
+    @RequestMapping("studentRegistrations")
+    public String studentRegistrations(Model model){
+        showCurrentTabColor(model);
+        return "dashboard/studentPages/registration";
     }
 }

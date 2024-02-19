@@ -207,15 +207,15 @@
                 <form method="post">
                     <input type="hidden" name="registrationId" th:value="${registration.registrationId}">
 
-                    <button class="btn btn-delete" type="submit" formaction="deleteRegistration">
+                    <button class="btn btn-delete" type="submit" formaction="deleteRegistration" title="Delete Registration">
                         <i class="fas fa-trash-alt"></i>
                     </button>
 
-                    <button class="btn btn-view" type="submit" formaction="dropRegistration">
+                    <button class="btn btn-view" type="submit" formaction="dropRegistration" title="Drop Registration">
                         <i class="fas fa-times"></i>
                     </button>
 
-                    <button class="btn btn-approve" type="submit" formaction="approveRegistration">
+                    <button class="btn btn-approve" type="submit" formaction="approveRegistration" title="Approve Registration">
                         <i class="fas fa-check"></i>
                     </button>
                 </form>

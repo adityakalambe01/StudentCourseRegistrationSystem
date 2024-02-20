@@ -127,4 +127,13 @@ public class StudentService {
     public Student viewCurrentStudent(Long studentId){
         return studentRepository.findById(studentId).get();
     }
+
+    /*
+    *
+    * Get Student by Email Id
+    *
+    * */
+    public Student getStudentByEmailID(String emailId){
+        return studentRepository.findByStudentEmailId(emailId);
+    }
 }

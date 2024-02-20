@@ -112,7 +112,7 @@ public class RegistrationService {
 
     /*
     *
-    * Get Registration by Id
+    * Get Registration by ID
     *
     * */
     public Registration getRegistrationById(Long registrationId){
@@ -123,5 +123,14 @@ public class RegistrationService {
             registration = null;
         }
         return registration;
+    }
+
+    /*
+    *
+    * Get Registrations by ID
+    *
+    * */
+    public List<Registration> getAllRegistrationByStudentID(Long studentId){
+        return registrationRepository.findByStudentId(studentId);
     }
 }

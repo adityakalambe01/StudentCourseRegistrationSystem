@@ -117,7 +117,7 @@
     }
 
     .btn-view {
-      background-color: #28a745; /* Green color for view button */
+      background-color: red; /* Green color for view button */
       color: #fff; /* White text color */
     }
 
@@ -166,7 +166,7 @@
 
 <!--  <a href="allStudents">Students</a>-->
 
-  <a href="studentRegistrations" th:style="${currentOpenedTab}">Registration</a>
+  <a href="studentRegistrations" th:style="${currentOpenedTab}">My Registration</a>
 
   <a href="logout">Logout</a>
 
@@ -177,12 +177,12 @@
 <div class="main-content">
   <header>
     <h1>Student Panel</h1>
-    <div class="search-container">
+    <!--<div class="search-container">
       <form>
         <input type="text" class="search-input" placeholder="Search Department..." name="departmentName">
         <input class="search-btn" type="submit" value="Search" formaction="departmentByName">
       </form>
-    </div>
+    </div>-->
   </header>
 
   <table>
@@ -211,7 +211,7 @@
 <!--            <i class="fas fa-trash-alt"></i>-->
 <!--          </button>-->
 
-          <button class="btn btn-view" type="submit" formaction="dropRegistration" title="Drop Registration">
+          <button class="btn btn-view" type="submit" formaction="dropStudentRegistration" title="Drop Registration">
             <i class="fas fa-times"></i>
           </button>
 
@@ -226,7 +226,7 @@
 
 
   <form>
-    <button class="btn btn-new-dept" type="submit" formaction="addNewRegistration"><i class="fas fa-plus"></i></button>
+    <button class="btn btn-new-dept" type="submit" formaction="addStudentRegistration"><i class="fas fa-plus"></i></button>
   </form>
 
 

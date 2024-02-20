@@ -18,4 +18,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query("select s from Student s order by s.studentFullName")
     List<Student> findByStudentIdAsc();
+
+
+
+    Student findByStudentEmailId(String emailId);
 }

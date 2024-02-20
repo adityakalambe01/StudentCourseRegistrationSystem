@@ -17,4 +17,6 @@ public interface RegistrationRepository extends JpaRepository<Registration, Long
 
     @Query("select n from Registration n order by n.status desc ")
     List<Registration> findAllDesc();
+
+    List<Registration> findByStudentId(Long studentId);
 }

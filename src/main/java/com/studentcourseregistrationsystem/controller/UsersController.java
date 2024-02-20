@@ -2,7 +2,9 @@ package com.studentcourseregistrationsystem.controller;
 
 import com.studentcourseregistrationsystem.controller.page.Redirect;
 import com.studentcourseregistrationsystem.entity.Users;
+import com.studentcourseregistrationsystem.repository.StudentRepository;
 import com.studentcourseregistrationsystem.repository.UsersRepository;
+import com.studentcourseregistrationsystem.service.StudentService;
 import com.studentcourseregistrationsystem.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +27,9 @@ public class UsersController {
 
     @Autowired
     Redirect redirectPage;
+
+    @Autowired
+    StudentService studentService;
 
     public static HttpSession httpSession;
 
@@ -94,9 +99,12 @@ public class UsersController {
 
             Users user = usersRepository.findByUserEmailId(emailId);
             role = user.getUserRole();
-            httpSession.setAttribute("userId",user.getUserid());
-            httpSession.setAttribute("userFullName",user.getUserFullName());
+            httpSession.setAttribute("userRole",role);
             httpSession.setAttribute("userEmailId",user.getUserEmailId());
+            if (role.equalsIgnoreCase("Student")){
+                httpSession.setAttribute("databaseStudentID",studentService.getStudentByEmailID(emailId).getStudentSerialNumber());
+                System.out.println(studentService.getStudentByEmailID(emailId));
+            }
 
             if (role.equalsIgnoreCase("admin")){
                 redirect =redirectPage.adminDashboard();

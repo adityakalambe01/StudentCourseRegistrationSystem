@@ -1,6 +1,7 @@
 package com.studentcourseregistrationsystem.controller.page;
 
 import com.studentcourseregistrationsystem.controller.UsersController;
+import com.studentcourseregistrationsystem.entity.Course;
 import com.studentcourseregistrationsystem.service.CourseService;
 import com.studentcourseregistrationsystem.service.DepartmentService;
 import com.studentcourseregistrationsystem.service.RegistrationService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class Redirect {
@@ -26,9 +29,15 @@ public class Redirect {
     public static final String currentOpenTab = "currentOpenedTab";
     public static final String colorOfCurrentOpenedTab = "background-color: green !important;";
 
+
+
     public static void showCurrentTabColor(Model model){
         model.addAttribute(Redirect.currentOpenTab, Redirect.colorOfCurrentOpenedTab);
     }
+
+    /*public static void getAllCourses(Model model){
+        model.addAttribute("allCourses",courseService.getAllCourse());
+    }*/
     /*
     *
     * Home Page
@@ -246,7 +255,21 @@ public class Redirect {
 
     @RequestMapping("logout")
     public String logout(){
-        UsersController.httpSession.invalidate();
+        String userRole = (String) UsersController.httpSession.getAttribute("userRole");
+
+        try {
+            if(UsersController.httpSession==null){
+                return "index";
+            }
+            else if (userRole.equalsIgnoreCase("Admin")){
+                UsersController.httpSession.invalidate();
+            }else if(userRole.equalsIgnoreCase("Student")){
+                UsersController.httpSession.invalidate();
+            }
+        }catch (Exception e){
+
+        }
+
         return "index";
     }
 
@@ -258,6 +281,16 @@ public class Redirect {
     @RequestMapping("studentRegistrations")
     public String studentRegistrations(Model model){
         showCurrentTabColor(model);
+        model.addAttribute("allRegistration", registrationService.getAllRegistrationByStudentID(
+                (Long) UsersController.httpSession.getAttribute("databaseStudentID")
+        ));
         return "dashboard/studentPages/registration";
+    }
+
+    @RequestMapping("addStudentRegistration")
+    public String addStudentRegistration(Model model){
+        showCurrentTabColor(model);
+        model.addAttribute("allCourses",courseService.getAllCourse());
+        return "dashboard/studentPages/addRegistration";
     }
 }

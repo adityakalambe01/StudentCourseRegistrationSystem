@@ -50,6 +50,31 @@ public class RegistrationController {
         return pageRedirect.allRegistration(model);
     }
 
+
+    /*
+    *
+    * Add Student Registration
+    *
+    * */
+    @PostMapping("addStudentRegistration")
+    public String addStudentRegistration(Long courseId, Model model){
+        Registration registration = new Registration();
+        registration.setStudentId(
+                (Long) UsersController.httpSession.getAttribute("databaseStudentID")
+        );
+        registration.setRegistrationDate(LocalDate.now());
+        registration.setStatus("Pending");
+        registration.setCourseName(courseRepository.findById(courseId).get().getCourseTitle());
+        registration.setCourseId(courseId);
+        registration.setStudentName(
+                studentRepository.findById(registration.getStudentId()).get().getStudentFullName()
+        );
+        if (registrationService.addNewRegistration(registration)){
+
+        }
+        return pageRedirect.studentRegistrations(model);
+    }
+
     /*
      *
      * Update Existing Registration
@@ -158,5 +183,20 @@ public class RegistrationController {
 
         }
         return pageRedirect.allRegistration(model);
+    }
+
+    /*
+    *
+    *
+    *
+    * */
+    @PostMapping("dropStudentRegistration")
+    public String dropStudentRegistration(Long registrationId, Model model){
+        Registration registration = registrationService.getRegistrationById(registrationId);
+        registration.setStatus("Dropped");
+        if (registrationService.updateExistingRegistration(registration)){
+
+        }
+        return pageRedirect.studentRegistrations(model);
     }
 }

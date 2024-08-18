@@ -22,6 +22,5 @@ public class Users {
 
     private String userPassword;
 
-    @Column(columnDefinition = "varchar(50) default 'student'")
     private String userRole;
 }
